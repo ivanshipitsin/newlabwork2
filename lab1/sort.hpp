@@ -33,18 +33,20 @@ template<typename T>
 class InsertSort : public iSort<T>{
 public:
     void sort(Sequence<T> & data, int start, int end, iComp<T> & comp){
-        for(int i = start + 1; i < end; i++){
+        for(int i = start + 1; i < end + 1; i++){
             T key = data.Get(i);
             int j = i - 1;
-            for(; j >= 0 && comp.cmp(data.Get(j), key); j--){
+            for(; j >= start && comp.cmp(data.Get(j), key); j--){
                     //mass[j+1] = mass[j];
-                    data.Set(j+1 ,data.Get(j));
+                    data.Set(j + 1 ,data.Get(j));
             }
-            if(j < 0){
-                j = 0;
+            if(j < start){
+                data.Set(start, key);
             }
-        //mass[j] = key;
-        data.Set(j, key);
+            //mass[j] = key;
+            if(j == i - 1)
+                continue;    
+            data.Set(j + 1, key);
         }
     }
 };
@@ -53,13 +55,15 @@ template<typename T>
 class CocktailSort : public iSort<T>{
 public:
     void sort(Sequence<T> & data,int start, int end ,iComp<T> & comp){
-        int right = end - 1;
+        int right = end;
         int left = start;
-        int contr = end - 1;
+        int contr = end;
         do{
             for(int i = right; i > left; i--){
                 if(comp.cmp(data.Get(i - 1), data.Get(i))){
-                    
+                    T tmp = data.Get(i);
+                    data.Set(i, data.Get(i - 1));
+                    data.Set(i - 1, tmp);
                     contr = i;
                 }
             }
@@ -90,8 +94,8 @@ public:
             return;
         }
         int middle = (end + start)/ 2 ;
-        mergesortGeneral(data, start, middle);
-        mergesortGeneral(data, middle + 1, end);
+        mergesortGeneral(data, start, middle, comp, tmp);
+        mergesortGeneral(data, middle + 1, end, comp, tmp);
         int i = start;
         int j = middle + 1;
         int k = 0;

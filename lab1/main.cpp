@@ -16,9 +16,20 @@ int main(int argc, char**argv){
     for(int i = 0; i < 1000; i++){
         massdl.Set(i, rand() % 10000);
     }
-    ReverseComp<int> comp;
-    BubbleSort<int> psort;
-    psort.sort(massdl, 0, 999, comp);
+    ArraySequence<int> mass(massdl);
+
+    //ReverseComp<int> comp;
+    DefaultComp<int> compp;
+    MergeSort<int> psort;
+    InsertSort<int> ppsort;
+    ppsort.sort(mass, 0, 999, compp);
+    psort.sort(massdl, 0, 999, compp);
+
+    for(int i = 0; i < 1000; i++){
+        if(mass.Get(i) != massdl.Get(i)){
+            std::cerr << "AAAAAA" << mass.Get(i) << "(" << i << ")" << massdl.Get(i) << std::endl;
+        }
+    }
 
     for(int i = 0; i < 1000; i++){
         std::cout << massdl.Get(i) << " ";
