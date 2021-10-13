@@ -1,5 +1,7 @@
+//#define DEBUG
 #include <iostream>
 #include "ArraySequence.hpp"
+#include "LinkedListSequence.hpp"
 #include "sort.hpp"
 
 template<typename T>
@@ -12,18 +14,29 @@ public:
 
 int main(int argc, char**argv){
     srand(time(nullptr));
-    ArraySequence<int> massdl(1000);
-    for(int i = 0; i < 1000; i++){
-        massdl.Set(i, rand() % 10000);
-    }
-    ArraySequence<int> mass(massdl);
-
-    //ReverseComp<int> comp;
+    // object sorting
     DefaultComp<int> compp;
     MergeSort<int> psort;
     InsertSort<int> ppsort;
+    QuickSort<int> prsort;
+
+    /*if(argc > 1){
+    bool typestruct;
+        std::cout << "Hello in my lab1 in 2))\n";
+        std::cout << "Select type of structer:\n";
+
+    }*/
+    LinkedListSequence<int> massdl;
+    for(int i = 0; i < 1000; i++){
+        massdl.Append(rand() % 10000);
+    }
+    LinkedListSequence<int> mass(massdl);
+
+    //ReverseComp<int> comp;
+    
     ppsort.sort(mass, 0, 999, compp);
-    psort.sort(massdl, 0, 999, compp);
+    //psort.sort(massdl, 0, 999, compp);
+    prsort.sort(massdl, 0, 999, compp);
 
     for(int i = 0; i < 1000; i++){
         if(mass.Get(i) != massdl.Get(i)){
@@ -32,7 +45,7 @@ int main(int argc, char**argv){
     }
 
     for(int i = 0; i < 1000; i++){
-        std::cout << massdl.Get(i) << " ";
+        std::cout << massdl.Get(i) << "\t";
     }
     std::cout << std::endl;
     return 0;

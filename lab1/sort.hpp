@@ -89,6 +89,7 @@ public:
         mergesortGeneral(data, start, end , comp, temp);
         delete[] temp;
     }
+private:
     void mergesortGeneral(Sequence<T> & data,int start, int end ,iComp<T> & comp, T * tmp){
         if(end - start == 0){
             return;
@@ -140,6 +141,51 @@ public:
         }
     }
     }
+};
+
+template<typename T>
+class QuickSort : public iSort<T>{
+public:
+    void sort(Sequence<T> & data, int start, int end, iComp<T> & comp){
+        QuickSortGeneral(data, start, end, comp);
+    }
+private:
+    void QuickSortGeneral(Sequence<T> & data, int start, int end, iComp<T> & comp){
+        if((end - start) == 1){
+            if(comp.cmp(data.Get(start), data.Get(end)) ){
+                T tmp = data.Get(start);
+                data.Set(start, data.Get(end));
+                data.Set(end, tmp);
+            }
+            return;
+        }
+        int right = end;
+        int left = start;
+        T key = data.Get((start + end) / 2);
+
+        while(right > left){
+            while(comp.cmp(data.Get(right), key) ) {
+                right--;
+            }
+            while(comp.cmp(key, data.Get(left)) ) {
+                left++;
+            }
+            if(right >= left){
+                T tmp = data.Get(left);
+                data.Set(left, data.Get(right));
+                data.Set(right, tmp);
+                right--;
+                left++;
+            }
+        }
+        if(left < end){
+            QuickSortGeneral(data, left, end, comp);
+        }
+        if(start < right){
+            QuickSortGeneral(data, start, right, comp);
+        }
+    }
+
 };
 
 #endif

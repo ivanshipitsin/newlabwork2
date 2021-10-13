@@ -9,8 +9,8 @@ public:
     ArraySequence(T*,int);
     ArraySequence();
     ArraySequence(const ArraySequence<T> &);
+    ArraySequence(const DynamicArray<T> &);
     ArraySequence(int);
-    ~ArraySequence();
     T GetFirst() const;
     T GetLast() const;
     T Get(int) const;
@@ -24,103 +24,93 @@ public:
     //friend void clear();
 
 private:
-    DynamicArray<T>* mass;
+    DynamicArray<T> mass;
 };
 
 /// ArraySequence
 template<class T>
-ArraySequence<T>::ArraySequence(T* item,int count){
-    mass = new DynamicArray<T>(item, count);
-
+ArraySequence<T>::ArraySequence(T* item,int count) : mass(item, count){
     #ifdef DEBUG 
-        std::cerr << "Generate Object type ArraySequence<T> with construct (T*, size)" << mass << " " << count << std::endl;
-        std::cerr << "Type of T" << typeid(mass->Get(0)).name() <<std::endl;
+        std::cerr << "Generate Object type ArraySequence<T> with construct (size)" << " " << count << std::endl;
+        std::cerr << "Type of T" << typeid(mass.Get(0)).name() <<std::endl;
+    #endif
+}
+
+template<typename T>
+ArraySequence<T>::ArraySequence(const DynamicArray<T> & data): mass(data){}
+
+template<class T>
+ArraySequence<T>::ArraySequence(int count) : mass(count){
+    #ifdef DEBUG 
+        std::cerr << "Generate Object type ArraySequence<T> with construct (size)" << " " << count << std::endl;
+        std::cerr << "Type of T" << typeid(mass.Get(0)).name() <<std::endl;
     #endif
 }
 
 template<class T>
-ArraySequence<T>::ArraySequence(int count){
-    mass = new DynamicArray<T>(count);
-
+ArraySequence<T>::ArraySequence(): mass(){
     #ifdef DEBUG 
-        std::cerr << "Generate Object type ArraySequence<T> with construct (size)" << mass << " " << count << std::endl;
-        std::cerr << "Type of T" << typeid(mass->Get(0)).name() <<std::endl;
+        std::cerr << "Generate Object type ArraySequence<T> with construct ()" <<  std::endl;
+        std::cerr << "Type of T" << typeid(mass.Get(0)).name() <<std::endl;
     #endif
 }
 
 template<class T>
-ArraySequence<T>::ArraySequence(){
-    mass = new DynamicArray<T>();
-
-    #ifdef DEBUG 
-        std::cerr << "Generate Object type ArraySequence<T> with construct ()" << mass << std::endl;
-        std::cerr << "Type of T" << typeid(mass->Get(0)).name() <<std::endl;
-    #endif
-}
-
-template<class T>
-ArraySequence<T>::ArraySequence(const ArraySequence <T> & list){
-
-
-    mass = new DynamicArray<T>(*(list.mass));
-}
-
-template<class T>
-ArraySequence<T>::~ArraySequence(){
-
-    #ifdef DEBUG 
-        std::cerr << "Destroy Object type ArraySequence<T>" << mass << std::endl;
-    #endif
-
-    delete mass;
-}
+ArraySequence<T>::ArraySequence(const ArraySequence <T> & list) : mass(list.mass) {}
 
 template<class T>
 T ArraySequence<T>::GetFirst() const {
-    return mass->Get(0);
+    return mass.Get(0);
 }
 
 template<class T>
 T ArraySequence<T>::GetLast() const {
-    return mass->Get(mass->GetSize() - 1);
+    return mass.Get(mass.GetSize() - 1);
 }
 
 template<class T>
 T ArraySequence<T>::Get(int ind) const{
-    return (mass->Get(ind));
+    #ifdef DEBUG
+        if(ind < 0 && ind >= GetLenght()){
+            std::cerr << "ERROR ARRAYSEQUENCE GET INDEX " << ind << std::endl;
+            throw "EXECPTION GET";
+        }
+    #endif
+    return mass.Get(ind);
 }
 
 template<class T>
 void ArraySequence<T>::Set(int ind,const T& item){
-    mass->Set(ind, item);
+    mass.Set(ind, item);
 }
 
 template<class T>
 int ArraySequence<T>::GetLenght() const{
-    return mass->GetSize();
+    return mass.GetSize();
 }
 
 template<class T>
-ArraySequence<T> * ArraySequence<T>::GetSubsequence(int start,int stop){
-    ArraySequence<T> * newlist = new ArraySequence<T>();
-    newlist->mass = (mass->Getsubarray(start, stop));
+ArraySequence<T> * ArraySequence<T>::GetSubsequence(int start,int stop) {
+    DynamicArray<T> *newdata = mass.Getsubarray(start, stop);
+    ArraySequence<T> * newlist = new ArraySequence<T>(*newdata);
+    delete newdata;
     return newlist;
 }
 
 template<class T>
 void ArraySequence<T>::Append(const T& item){
-    mass->Resize(mass->GetSize() + 1);
-    mass->Set(mass->GetSize() - 1, item);
+    mass.Resize(mass.GetSize() + 1);
+    mass.Set(mass.GetSize() - 1, item);
 }
 
 template<class T>
 void ArraySequence<T>::Prepend(const T& item){
-    mass->Prepend(item);
+    mass.Prepend(item);
 }
 
 template<class T>
 void ArraySequence<T>::InsertAt(const T& item, int ind){
-    mass->InsertAt(ind, item);
+    mass.InsertAt(ind, item);
 }
 
 template<class T>
