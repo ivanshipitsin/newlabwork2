@@ -17,8 +17,8 @@ public:
     LinkedList();
     LinkedList(T*, int);
     LinkedList(const LinkedList <T> & list);
-    T GetFirst();
-    T GetLast();
+    T GetFirst() const;
+    T GetLast() const;
     T Get(int) const;
     LinkedList<T> * GetSubList(int,int);
     int GetLenght() const;
@@ -90,12 +90,12 @@ void LinkedList<T>::Prepend(T item){
 }
 
 template<class T>
-T LinkedList<T>::GetFirst(){
+T LinkedList<T>::GetFirst() const{
     return head->data;
 }
 
 template<class T>
-T LinkedList<T>::GetLast(){
+T LinkedList<T>::GetLast() const{
     return tail->data;
 }
 

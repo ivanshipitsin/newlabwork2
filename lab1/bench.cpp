@@ -13,8 +13,8 @@ int main(int argc, char**argv){
     MergeSort<int> psort;
     InsertSort<int> ppsort;
 
-    std::ofstream file("MassMerg.txt");
-    for(int N = 2048; N < 10000000; N += 1000){
+    std::ofstream file("MassInsertvsMerge.txt");
+    for(int N = 100; N < 100000; N += 10){
         ArraySequence<int> massdl(N);
         for(int i = 0; i < N; i++){
             massdl.Set(i, rand() % 1000000);
@@ -25,7 +25,7 @@ int main(int argc, char**argv){
         p = clock() - p;
 
         double timep = (double) p / CLOCKS_PER_SEC;
-        std::cout << N << " " << timep << "\n";
+       // std::cout << N << " " << timep << "\n";
         file << N << " " << timep << std::endl;
         
     }
