@@ -73,22 +73,22 @@ int main(int argc, char**argv){
                 time1 = (double)tp / CLOCKS_PER_SEC;
 
                 tp = clock();
-                isort.sort(list1, 0, count - 1, compp);
+                isort.sort(list2, 0, count - 1, compp);
                 tp = clock() - tp;
                 time2 = (double)tp / CLOCKS_PER_SEC;
 
                 tp = clock();
-                csort.sort(list1, 0, count - 1, compp);
+                csort.sort(list3, 0, count - 1, compp);
                 tp = clock() - tp;
                 time3 = (double) tp / CLOCKS_PER_SEC;
 
                 tp = clock();
-                bsort.sort(list1, 0, count - 1, compp);
+                bsort.sort(list4, 0, count - 1, rcompp);
                 tp = clock() - tp;
                 time4 = (double) tp / CLOCKS_PER_SEC;
 
                 tp = clock();
-                qsort.sort(list1, 0, count - 1, compp);
+                qsort.sort(list5, 0, count - 1, compp);
                 tp = clock() - tp;
                 time5 = (double) tp / CLOCKS_PER_SEC;
 
@@ -98,6 +98,13 @@ int main(int argc, char**argv){
                 std::cout << "COCKTAILSORT TIME(in linked list):" << time3 << "\n";
                 std::cout << "BUBBLESORT TIME(in linked list):" << time4 << "\n";
                 std::cout << "QUICKSORT TIME(in linked list):" << time5 << "\n";
+
+                if(!generate){
+                    std::cout << "\t" << "Merg" << "\t" << "Insr" << "\t" << "Cock" << "\t" << "Bubb" << "\t" << "Quic" << "\n";
+                    for(int i = 0; i < list1.GetLenght(); i++){
+                        std:: cout  << "\t" << list1.Get(i) << "\t" << list2.Get(i) << "\t" << list3.Get(i) << "\t" << list4.Get(i) << "\t" << list5.Get(i) << "\n";
+                    }
+                }
 
             } else {
                 ArraySequence<int> list1(arr);
@@ -113,22 +120,22 @@ int main(int argc, char**argv){
                 time1 = (double)tp / CLOCKS_PER_SEC;
 
                 tp = clock();
-                isort.sort(list1, 0, count - 1, compp);
+                isort.sort(list2, 0, count - 1, compp);
                 tp = clock() - tp;
                 time2 = (double)tp / CLOCKS_PER_SEC;
 
                 tp = clock();
-                csort.sort(list1, 0, count - 1, compp);
+                csort.sort(list3, 0, count - 1, compp);
                 tp = clock() - tp;
                 time3 = (double) tp / CLOCKS_PER_SEC;
 
                 tp = clock();
-                bsort.sort(list1, 0, count - 1, compp);
+                bsort.sort(list4, 0, count - 1, rcompp);
                 tp = clock() - tp;
                 time4 = (double) tp / CLOCKS_PER_SEC;
 
                 tp = clock();
-                qsort.sort(list1, 0, count - 1, compp);
+                qsort.sort(list5, 0, count - 1, compp);
                 tp = clock() - tp;
                 time5 = (double) tp / CLOCKS_PER_SEC;
 
@@ -138,9 +145,15 @@ int main(int argc, char**argv){
                 std::cout << "COCKTAILSORT TIME(in Dynamic array):" << time3 << "\n";
                 std::cout << "BUBBLESORT TIME(in Dynamic array):" << time4 << "\n";
                 std::cout << "QUICKSORT TIME(in Dynamic array):" << time5 << "\n";
+            
+
+                if(!generate){
+                    std::cout << "\t" << "Merg" << "\t" << "Insr" << "\t" << "Cock" << "\t" << "Bubb" << "\t" << "Quic" << "\n";
+                    for(int i = 0; i < list1.GetLenght(); i++){
+                        std:: cout  << "\t" << list1.Get(i) << "\t" << list2.Get(i) << "\t" << list3.Get(i) << "\t" << list4.Get(i) << "\t" << list5.Get(i) << "\n";
+                    }
+                }
             }
-        
-        
         }
 
     }

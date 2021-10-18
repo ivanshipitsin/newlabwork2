@@ -61,6 +61,9 @@ LinkedList<T>::LinkedList(T* item, int count){
 template<class T>
 LinkedList<T>::LinkedList(const LinkedList <T> & list){
     Item<T> * ptr = list.head;
+    len = 0;
+    head = nullptr;
+    tail = nullptr;
     while(ptr) {
         Append(ptr->data);
         ptr = ptr->next;
