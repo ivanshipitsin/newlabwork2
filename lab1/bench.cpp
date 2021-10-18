@@ -13,11 +13,11 @@ int main(int argc, char**argv){
     MergeSort<int> psort;
     InsertSort<int> ppsort;
 
-    std::ofstream file("MassInsertvsMerge.txt");
+    std::ofstream file("MassMergeright.txt");
     for(int N = 100; N < 100000; N += 10){
         ArraySequence<int> massdl(N);
         for(int i = 0; i < N; i++){
-            massdl.Set(i, rand() % 1000000);
+            massdl.Set(i, i);
         }
 
         clock_t p = clock();
