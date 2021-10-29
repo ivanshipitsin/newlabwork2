@@ -100,25 +100,15 @@ private:
         int i = start;
         int j = middle + 1;
         int k = 0;
-        while(i <= middle || j <= end){
-            if(j <= end && i<= middle && comp.cmp(data.Get(i), data.Get(j))){
+        for(k = 0; i<= middle || j <= end; k++){
+            if(j <= end && i<= middle && comp.cmp(data.Get(i), data.Get(j)) || i > middle){
                 tmp[k] = data.Get(j);
-                k++;
                 j++;
             }
-            else if(i <= middle && j <= end && !comp.cmp(data.Get(i), data.Get(j))){
+            else if(i <= middle && j <= end && !comp.cmp(data.Get(i), data.Get(j)) || j > end){
                 tmp[k] = data.Get(i);
                 i++;
-                k++;
-            } else if( i > middle){
-                tmp[k] = data.Get(j);
-                k++;
-                j++;
-            } else if(j > end){
-                tmp[k] = data.Get(i);
-                k++;
-                i++;
-            }
+            } 
         }
 
         for(k--; k >=0; k--){
