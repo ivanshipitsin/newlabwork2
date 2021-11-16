@@ -10,9 +10,9 @@ void timetestra(std::string filename, iSort<int> & psort, int start, int end, in
     std::ofstream file(filename);
     int k = 0;
     for(int N = start; N < end; N += step){
-        ArraySequence<int> massdl(N);
+        LinkedListSequence<int> massdl;
         for(int i = 0; i < N; i++){
-            massdl.Set(i, N - i);
+            massdl.Append(N - i);
         }
 
         clock_t p = clock();
@@ -43,13 +43,13 @@ int main(int argc, char**argv){
     InsertSort<int> isort;
     QuickSort<int> qsort;
     std::cout <<"MERGESORTEREVERS is start" << std::endl;
-    timetestra("MergeSortRevers.txt", msort, 10,10000, 10);
+    timetestra("MergeSortReversL.txt", msort, 10,10000, 10);
     std::cout <<"QUICKSORTEREVERS is start" << std::endl;
-    timetestra("QuickSortRevers.txt", qsort, 10,10000, 10);
+    timetestra("QuickSortReversL.txt", qsort, 10,10000, 10);
     std::cout <<"COCKTAILSORTEREVERS is start" << std::endl;
-    timetestra("CocktailSortRevers.txt", csort, 10,10000, 10);
+    timetestra("CocktailSortReversL.txt", csort, 10,10000, 10);
     std::cout <<"INSERTSORTEREVERS is start" << std::endl;
-    timetestra("InsertSortRevers.txt", isort, 10,10000, 10);
+    timetestra("InsertSortReversL.txt", isort, 10,10000, 10);
 
     
 
