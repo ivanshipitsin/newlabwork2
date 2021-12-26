@@ -42,13 +42,13 @@ int main(int argc, char**argv){
     MergeSort<int> msort;
     InsertSort<int> isort;
     QuickSort<int> qsort;
-    std::cout <<"MERGESORTEREVERS is start" << std::endl;
-    timetestra("MergeSortReversL.txt", msort, 10,10000, 10);
-    std::cout <<"QUICKSORTEREVERS is start" << std::endl;
-    timetestra("QuickSortReversL.txt", qsort, 10,10000, 10);
-    std::cout <<"COCKTAILSORTEREVERS is start" << std::endl;
-    timetestra("CocktailSortReversL.txt", csort, 10,10000, 10);
-    std::cout <<"INSERTSORTEREVERS is start" << std::endl;
+    std::cout <<"MERGESORTERAND is start" << std::endl;
+    timetestra("MergeSortRandL.txt", msort, 10,10000, 10);
+    std::cout <<"QUICKSORTERAND is start" << std::endl;
+    timetestra("QuickSortRandL.txt", qsort, 10,10000, 10);
+    std::cout <<"COCKTAILSORTERAND is start" << std::endl;
+    timetestra("CocktailSortRandL.txt", csort, 10,10000, 10);
+    std::cout <<"INSERTSORTEREVERSE is start" << std::endl;
     timetestra("InsertSortReversL.txt", isort, 10,10000, 10);
 
     
